@@ -1,4 +1,13 @@
 {
   "name": "live_location_tracker",
-  "displayName": "live_location_tracker"
+  "displayName": "Your App Display Name",
+  "version": "1.0.0",
+  "android": {
+    "package": "com.yourcompany.yourapp",
+    "googleServicesFile": "./google-services.json"  
+  },
+  "ios": {
+    "bundleIdentifier": "com.ffa.live-location-tracker",
+    "googleServicesFile": "./GoogleService-Info.plist"  
+  }
 }
