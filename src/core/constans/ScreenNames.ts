@@ -9,4 +9,6 @@ export const SCREEN_NAMES = {
     
     // Other
     SPLASH_SCREEN: 'SplashScreen',
+    ONBOARDING: 'Onboarding',
+    QR_SCANNER: 'QrScanner',
 }
