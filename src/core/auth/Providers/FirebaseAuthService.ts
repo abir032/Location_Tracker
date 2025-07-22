@@ -37,6 +37,13 @@ export class FirebaseAuthService implements IAuthService {
     }
   }
   onAuthStateChanged(callback: (user: User | null) => void) {
-    return onAuthStateChanged(this.auth, callback);
-  }
+  return onAuthStateChanged(getAuth(), (firebaseUser) => {
+    if (firebaseUser) {
+      console.log("User in FirebaseAuthService:", firebaseUser);
+      callback(firebaseUser as User);
+    } else {
+      callback(null);
+    }
+  });
+}
 }

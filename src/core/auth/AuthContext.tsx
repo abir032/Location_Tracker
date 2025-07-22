@@ -7,6 +7,7 @@ interface AuthContextType {
   user: User | null;
   signIn: (data: AuthData) => Promise<void>;
   signOut: () => Promise<void>;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -14,10 +15,13 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const authService: IAuthService = new FirebaseAuthService();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = authService.onAuthStateChanged((user) => {
+      console.log("User in AuthContext:", user);
       setUser(user);
+      setIsLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -31,7 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{user, signIn, signOut}}>
+    <AuthContext.Provider value={{user, signIn, signOut, isLoading}}>
       {children}
     </AuthContext.Provider>
   );
